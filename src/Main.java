@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class App {
+public class Main {
     private static final String CLIENTS_FILE_PATH = "clients.ser";
     private static final String SCREENINGS_FILE_PATH = "screenings.ser";
 
@@ -42,9 +42,9 @@ public class App {
             }
         }
 
-        
-        Screening screening1 = new Screening("The Matrix", "2021-10-01", "20:00", 16, seats1);
-        Screening screening2 = new Screening("The Godfather", "2021-10-02", "19:30", 12, seats2);
+
+        Screening screening1 = new Screening("Matrix", "2021-10-01", "20:00", 16, seats1);
+        Screening screening2 = new Screening("Baby Driver", "2021-10-02", "19:30", 12, seats2);
 
         List<Client> clients = new ArrayList<>();
 
@@ -112,7 +112,7 @@ public class App {
                 Map<Character, Map<Integer, Boolean>> availableSeats = new HashMap<>();
                 for (Map.Entry<Character, Map<Integer, Boolean>> row : screening.getSeats().entrySet()) {
                     availableSeats.put(row.getKey(), new HashMap<>(row.getValue()));
-                    
+
                 }
 
                 for (Client client : clients) {
@@ -184,7 +184,7 @@ public class App {
             {
                 System.out.println("Invalid choice!");
             }
-            
+
         }
     }
 

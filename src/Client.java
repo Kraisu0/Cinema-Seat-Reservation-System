@@ -48,13 +48,7 @@ class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "Klient{" +
-                "nazwisko='" + surname + '\'' +
-                "| imie='" + name + '\'' +
-                "| email='" + email + '\'' +
-                "| numer telefonu='" + phoneNumber + '\'' +
-                "| " + screening + //spektakl
-                "| siedzenia=" + seats +
-                '}';
+        return surname + ", " + name + ", " + email + ", " + phoneNumber + ", " + screening + ", " + seats;
     }
+
 }

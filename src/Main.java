@@ -53,7 +53,7 @@ public class Main {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(clientsFile))) {
                 clients = (List<Client>) ois.readObject();
             } catch (ClassNotFoundException e) {
-                System.err.println("Error reading clients file: " + e.getMessage());
+                System.err.println("Błąd odczytu pliku klinetów: " + e.getMessage());
             }
         }
 
@@ -63,7 +63,7 @@ public class Main {
                 screening1 = (Screening) ois.readObject();
                 screening2 = (Screening) ois.readObject();
             } catch (ClassNotFoundException e) {
-                System.err.println("Error reading screenings file: " + e.getMessage());
+                System.err.println("Błąd odczytu pliku seansów: " + e.getMessage());
             }
         }
 
@@ -71,15 +71,15 @@ public class Main {
         boolean isRunning = true;
         while (isRunning)
         {
-            System.out.println("Welcome to the Cinema Reservation System!");
-            System.out.println("Please choose an option:");
-            System.out.println("1. Make a reservation");
-            System.out.println("2. Print reservations");
-            System.out.println("3. Exit");
+            System.out.println("Witamy w kinowym systemie rezerwacji!");
+            System.out.println("Prosze wybrać opcje:");
+            System.out.println("1. Wykonaj rezerwacje");
+            System.out.println("2. Wydrukuj liste rezerwacji");
+            System.out.println("3. Wyjsćie");
             int choice = scanner.nextInt();
             if (choice == 1)
             {
-                System.out.println("Choose a screening:");
+                System.out.println("Wybierz seans:");
                 System.out.println("1. " + screening1.getTitle() + " " + screening1.getDay() + " " + screening1.getTime());
                 System.out.println("2. " + screening2.getTitle() + " " + screening2.getDay() + " " + screening2.getTime());
                 choice = scanner.nextInt();
@@ -91,23 +91,23 @@ public class Main {
                 } else if (choice == 2) {
                     screening = screening2;
                 } else {
-                    System.out.println("Invalid choice.");
+                    System.out.println("Zły wybór.");
                     return;
                 }
 
-                System.out.print("Enter your surname: ");
+                System.out.print("Wpisz swoje nazwisko: ");
                 String surname = scanner.nextLine();
 
-                System.out.print("Enter your name: ");
+                System.out.print("Wpisz swoje imie: ");
                 String name = scanner.nextLine();
 
-                System.out.print("Enter your email: ");
+                System.out.print("Wpisz swój mail: ");
                 String email = scanner.nextLine();
 
-                System.out.print("Enter your phone number: ");
+                System.out.print("Wpisz swój numer telefonu: ");
                 String phoneNumber = scanner.nextLine();
 
-                System.out.println("Screening: " + screening.getTitle() + " " + screening.getDay() + " " + screening.getTime());
+                System.out.println("Seans: " + screening.getTitle() + " " + screening.getDay() + " " + screening.getTime());
 
                 Map<Character, Map<Integer, Boolean>> availableSeats = new HashMap<>();
                 for (Map.Entry<Character, Map<Integer, Boolean>> row : screening.getSeats().entrySet()) {
@@ -127,7 +127,7 @@ public class Main {
                     }
                 }
 
-                System.out.println("Available seats:");
+                System.out.println("Dostępne siedzenia:");
                 for (Map.Entry<Character, Map<Integer, Boolean>> row : availableSeats.entrySet()) {
                     System.out.print(row.getKey() + " ");
                     for (Map.Entry<Integer, Boolean> seat : row.getValue().entrySet()) {
@@ -138,19 +138,19 @@ public class Main {
                     System.out.println();
                 }
 
-                System.out.print("Enter the number of seats you want to reserve: ");
+                System.out.print("Prosze wpisac ile siedzeń chcesz zarezerwować: ");
                 int numberOfSeats = scanner.nextInt();
                 scanner.nextLine();
 
                 List<String> seatsToReserve = new ArrayList<>();
                 int counter = 0;
                 while (seatsToReserve.size() < numberOfSeats && counter < numberOfSeats) {
-                    System.out.print("Enter the seat " + (counter + 1) + " (e.g. A1): ");
+                    System.out.print("Wpisz siedzenie " + (counter + 1) + " (np. A1): ");
                     String seatNumberInput = scanner.nextLine();
                     char rowInput = seatNumberInput.charAt(0);
                     int seatInput = Integer.parseInt(seatNumberInput.substring(1));
                     if (availableSeats.get(rowInput).get(seatInput)) {
-                        System.out.println("This seat is already taken.");
+                        System.out.println("To siedzenie jest już zajęte.");
                     } else {
                         availableSeats.get(rowInput).put(seatInput, true);
                         seatsToReserve.add(seatNumberInput);
@@ -170,7 +170,7 @@ public class Main {
                     oos.writeObject(screening2);
                 }
 
-                System.out.println("Reservation successful.");
+                System.out.println("Rezerwacja udana.");
             }
             else if (choice == 2)
             {
@@ -182,7 +182,7 @@ public class Main {
             }
             else
             {
-                System.out.println("Invalid choice!");
+                System.out.println("Zły wybór!");
             }
 
         }

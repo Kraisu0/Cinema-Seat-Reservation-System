@@ -42,11 +42,11 @@ class Screening implements Serializable {
 
     @Override
     public String toString() {
-        return "Spektakl= {" +
-                "tytuł='" + title + '\'' +
-                "| dzień='" + day + '\'' +
-                "| godzina='" + time + '\'' +
-                "| ograniczenie wiekowe=" + ageRestrictions +
-                '}';
+        return "Spektakl " +
+                "tytuł: '" + title + '\'' +
+                ", dzień: '" + day + '\'' +
+                ", godzina: '" + time + '\'' +
+                ", ograniczenie wiekowe: " + ageRestrictions;
     }
+
 }

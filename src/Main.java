@@ -1,3 +1,4 @@
+import java.awt.desktop.SystemEventListener;
 import java.io.*;
 import java.util.*;
 
@@ -163,11 +164,13 @@ public class Main {
 
                 try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(clientsFile))) {
                     oos.writeObject(clients);
+                    System.out.println("`Klienci` zostali zserializowani");
                 }
 
                 try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(screeningsFile))) {
                     oos.writeObject(screening1);
                     oos.writeObject(screening2);
+                    System.out.println("`Seanse` zostały zserializowane");
                 }
 
                 System.out.println("Rezerwacja udana.");
@@ -188,15 +191,25 @@ public class Main {
         }
     }
 
- private static void printAllReservations() throws Exception {
-        FileInputStream fis = new FileInputStream(CLIENTS_FILE_PATH);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        List<Client> clients = (List<Client>) ois.readObject();
-        ois.close();
-        fis.close();
-        for (Client client : clients) {
-            System.out.println(client);
+    private static void printAllReservations() {
+        try {
+            FileInputStream fis = new FileInputStream(CLIENTS_FILE_PATH);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            System.out.println("Dane z pliku odczytane!");
+            List<Client> clients = (List<Client>) ois.readObject();
+            ois.close();
+            fis.close();
+            for (Client client : clients) {
+                System.out.println(client);
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + CLIENTS_FILE_PATH);
+        } catch (IOException e) {
+            System.err.println("An error occurred while reading the file: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.err.println("Error in reading object: " + e.getMessage());
         }
     }
+
 }
    
